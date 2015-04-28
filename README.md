@@ -10,6 +10,11 @@ Oblique removes the markup layer of abstraction, while retaining the
 organizational convenience of static site templates. This approach could
 be thought of as "static site assembly".
 
+When you make a site with Oblique, the build step is optional. You
+can author the content in HTML to have a running site, and then run
+Oblique on whatever aggregate files you want to create the archived,
+"detail" pages for each entry in the aggregate.
+
 For example:
 
 ```html
@@ -50,6 +55,7 @@ For example:
 </body>
 </html>
 ```
+    $ oblique index.html
 
 Given this index page, Oblique's simple job is to archive
 the posts into `/-/today-i-learned-something-weird.html` and
