@@ -11,9 +11,10 @@ organizational convenience of static site templates. This approach could
 be thought of as "static site assembly".
 
 When you make a site with Oblique, the build step is optional. You
-can author the content in HTML to have a running site, and then run
-Oblique on whatever aggregate files you want to create the archived,
-"detail" pages for each entry in the aggregate.
+can author the content in HTML and have a site that will render just
+fine in the web browser. Then, you can use Oblique on whatever
+aggregate files you want to create the archived, "detail" pages for
+each entry in the aggregate.
 
 For example:
 
