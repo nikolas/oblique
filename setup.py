@@ -6,7 +6,7 @@ setup(
     name='Oblique',
     version='0.1',
     description='An indirect static site generator',
-    install_requires=['lxml'],
+    install_requires=['lxml', 'cssselect'],
     license='GPL',
     packages=find_packages(),
     test_suite='oblique.tests',

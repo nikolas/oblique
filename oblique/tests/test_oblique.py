@@ -1,12 +1,9 @@
 import unittest
 from lxml import html
-from oblique import Oblique
+from oblique import get_items
 
 
 class TestOblique(unittest.TestCase):
-    def setUp(self):
-        self.o = Oblique()
-
     def test_get_items_empty(self):
         doc = html.document_fromstring(
             '<!doctype html>'
@@ -17,7 +14,7 @@ class TestOblique(unittest.TestCase):
             '</body>'
             '</html>'
         )
-        self.assertEqual(len(self.o.get_items(doc)), 0)
+        self.assertEqual(len(get_items(doc)), 0)
 
     def test_get_items(self):
         doc = html.document_fromstring(
@@ -36,4 +33,4 @@ class TestOblique(unittest.TestCase):
             '</body>'
             '</html>'
         )
-        self.assertEqual(len(self.o.get_items(doc)), 2)
+        self.assertEqual(len(get_items(doc)), 2)
