@@ -8,18 +8,25 @@ class ObliqueDoc:
     filename = 'doc.html'
 
 
-def get_item_filename(el):
-    """Given an lxml element, return a filename.
+def item_has_title_link(el):
+    """Returns True if the given element has a title link."""
+    return len(el.cssselect('h1 a')) > 0
 
-    :rtype: string
+
+def get_item_filepath(el):
+    """Given an lxml element, return a dirname and filename.
+
+    :rtype: string, string
     """
+    dirname = '-'
     filename = 'doc.html'
     title_link_el = el.cssselect('h1 a')[0]
     href = title_link_el.get('href')
-    match = re.match(r'.*/(\S+.html)$', href)
+    match = re.match(r'.*/(\S)/(\S+.html)$', href)
     if match:
-        filename = match.groups()[0]
-    return filename
+        dirname = match.groups()[0]
+        filename = match.groups()[1]
+    return dirname, filename
 
 
 def get_items(doc):
@@ -30,26 +37,31 @@ def get_items(doc):
     return doc.find_class('post')
 
 
-def parse_doc(docstring):
-    """
-    :rtype: string
-    """
-    doc = html.document_fromstring(docstring)
-    posts = get_items(doc)
-    print('Found %d posts' % len(posts))
-    for post in posts:
-        fname = get_item_filename(post)
-        if fname:
-            # Create a detail page for this post.
-            pass
-    return doc
+class Oblique:
+    def parse_doc(self, docstring):
+        """
+        :rtype: string
+        """
+        doc = html.document_fromstring(docstring)
+        posts = get_items(doc)
+        print('Found %d posts' % len(posts))
+        for post in posts:
+            if item_has_title_link(post):
+                dname, fname = get_item_filepath(post)
+                print(dname, fname)
+                # Create a detail page for this post.
+        return doc
+
+    def open_doc(self, docname):
+        f = open(docname, 'r')
+        s = f.read()
+        print(self.parse_doc(s))
+        f.close()
 
 
 if __name__ == '__main__':
     try:
-        f = open(sys.argv[1], 'r')
-        s = f.read()
-        print(parse_doc(s))
-        f.close()
+        o = Oblique()
+        o.open_doc(sys.argv[1])
     except:
         print('Usage:\n\toblique filename.html')

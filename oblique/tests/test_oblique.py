@@ -1,9 +1,12 @@
 import unittest
 from lxml import html
-from oblique import get_items
+from oblique import Oblique, get_items
 
 
 class TestOblique(unittest.TestCase):
+    def setUp(self):
+        o = Oblique()
+
     def test_get_items_empty(self):
         doc = html.document_fromstring(
             '<!doctype html>'

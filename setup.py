@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='Oblique',
+    name='oblique',
     version='0.1',
     description='An indirect static site generator',
     install_requires=['lxml', 'cssselect'],
