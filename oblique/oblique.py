@@ -41,7 +41,19 @@ def get_items(doc):
 
 
 class Oblique:
-    def parse_doc(self, docstring):
+    @staticmethod
+    def write_doc(dname, fname, post, skel):
+        """Write a detail page for the given post."""
+        try:
+            os.mkdir('/tmp/%s' % dname)
+        except:
+            pass
+        print(dname, fname)
+        with open('/tmp/%s/%s' % (dname, fname), 'w') as f:
+            f.write(bytes.decode(html.tostring(skel)))
+
+    @classmethod
+    def parse_doc(cls, docstring):
         """
         :rtype: string
         """
@@ -51,6 +63,7 @@ class Oblique:
         skeleton = deepcopy(doc)
         for post in skeleton.cssselect('.post'):
             post.drop_tree()
+
         for post in posts:
             if item_has_title_link(post):
                 myskel = deepcopy(skeleton)
@@ -58,21 +71,15 @@ class Oblique:
                 el.append(post)
 
                 dname, fname = get_item_filepath(post)
-                # Create a detail page for this post.
-                try:
-                    os.mkdir('/tmp/%s' % dname)
-                except:
-                    pass
-                print(dname, fname)
-                with open('/tmp/%s/%s' % (dname, fname), 'w') as f:
-                    f.write(bytes.decode(html.tostring(myskel)))
+                cls.write_doc(dname, fname, post, myskel)
 
         return doc
 
-    def open_doc(self, docname):
+    @classmethod
+    def open_doc(cls, docname):
         f = open(docname, 'r')
         s = f.read()
-        print(self.parse_doc(s))
+        print(cls.parse_doc(s))
         f.close()
 
 
@@ -80,5 +87,5 @@ if __name__ == '__main__':
     try:
         o = Oblique()
         o.open_doc(sys.argv[1])
-    except:
+    except IndexError:
         print('Usage:\n\toblique filename.html')

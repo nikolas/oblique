@@ -56,7 +56,7 @@ For example:
 </body>
 </html>
 ```
-    $ oblique index.html
+    $ python3 oblique/oblique.py index.html
 
 Given this index page, Oblique's simple job is to archive
 the posts into `/-/today-i-learned-something-weird.html` and
