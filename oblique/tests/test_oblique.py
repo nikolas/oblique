@@ -1,6 +1,8 @@
 import unittest
+
 from lxml import html
-from oblique import Oblique, get_items
+
+from oblique.oblique import Oblique, get_items
 
 
 class TestOblique(unittest.TestCase):
