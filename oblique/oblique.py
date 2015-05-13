@@ -3,7 +3,7 @@ import re
 import sys
 from copy import deepcopy
 
-from lxml import etree, html
+from lxml import html
 
 
 class ObliqueDoc:
@@ -21,7 +21,7 @@ def get_item_filepath(el):
 
     :rtype: string, string
     """
-    dirname = '-'
+    dirname = 'oblique'
     filename = 'doc.html'
     title_link_el = el.cssselect('h1 a')[0]
     href = title_link_el.get('href')

@@ -7,7 +7,7 @@ from oblique.oblique import Oblique, get_items
 
 class TestOblique(unittest.TestCase):
     def setUp(self):
-        o = Oblique()
+        self.o = Oblique()
 
     def test_get_items_empty(self):
         doc = html.document_fromstring(
@@ -29,10 +29,12 @@ class TestOblique(unittest.TestCase):
             '</head>'
             '<body>'
 
-            '<div class="post" itemscope itemtype="http://schema.org/BlogPosting">'
+            '<div class="post" itemscope '
+            'itemtype="http://schema.org/BlogPosting">'
             '</div>'
 
-            '<div class="post" itemscope itemtype="http://schema.org/BlogPosting">'
+            '<div class="post" itemscope '
+            'itemtype="http://schema.org/BlogPosting">'
             '</div>'
 
             '</body>'
