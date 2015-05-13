@@ -61,8 +61,7 @@ class Oblique:
         posts = get_items(doc)
         print('Found %d posts' % len(posts))
         skeleton = deepcopy(doc)
-        for post in skeleton.cssselect('.post'):
-            post.drop_tree()
+        map(lambda x: x.drop_tree(), skeleton.cssselect('.post'))
 
         for post in posts:
             if item_has_title_link(post):
