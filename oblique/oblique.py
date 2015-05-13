@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 from copy import deepcopy
 
 from lxml import etree, html
@@ -73,3 +74,11 @@ class Oblique:
         s = f.read()
         print(self.parse_doc(s))
         f.close()
+
+
+if __name__ == '__main__':
+    try:
+        o = Oblique()
+        o.open_doc(sys.argv[1])
+    except:
+        print('Usage:\n\toblique filename.html')
