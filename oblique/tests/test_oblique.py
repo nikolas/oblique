@@ -1,4 +1,6 @@
-from unittest import TestCase, mock
+import builtins
+from unittest import TestCase
+from unittest.mock import mock_open, patch
 from copy import deepcopy
 
 from lxml import html
@@ -49,7 +51,7 @@ class TestOblique(TestCase):
         map(lambda x: x.drop_tree(), myskel.cssselect('.post'))
         post = doc.cssselect('.post')[0]
 
-        m = mock.mock_open()
-        with mock.patch('__main__.open', m, create=True):
+        open_ = mock_open()
+        with patch.object(builtins, 'open', open_):
             self.o.write_doc('abc', '123', post, myskel)
-        print(m.mock_calls)
+        open_.assert_called_once_with('/tmp/abc/123', 'w')
