@@ -61,3 +61,8 @@ For example:
 Given this index page, Oblique's simple job is to archive
 the posts into `/-/today-i-learned-something-weird.html` and
 `/-/a-note-from-the-roaring-20s.html`.
+
+## Testing
+
+    $ source env/bin/activate
+    $ python setup.py test
