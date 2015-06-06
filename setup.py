@@ -7,6 +7,7 @@ setup(
     version='0.1',
     description='An indirect static site generator',
     install_requires=['lxml', 'cssselect'],
+    setup_requires=['flake8'],
     license='GPL',
     packages=find_packages(),
     test_suite='oblique.tests',
