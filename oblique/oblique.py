@@ -76,15 +76,21 @@ class Oblique:
 
     @classmethod
     def open_doc(cls, docname):
+        """Open an HTML file, print the parse results, and close it.
+
+        Returns the parse results as a string.
+        """
         f = open(docname, 'r')
         s = f.read()
-        print(cls.parse_doc(s))
+        results = cls.parse_doc(s)
         f.close()
+        return results
 
 
 if __name__ == '__main__':
     try:
         o = Oblique()
-        o.open_doc(sys.argv[1])
+        results = o.open_doc(sys.argv[1])
+        print(results)
     except IndexError:
         print('Usage:\n\toblique filename.html')
