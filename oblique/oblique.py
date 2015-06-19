@@ -53,6 +53,13 @@ class Oblique:
         with open(path, 'w') as f:
             f.write(bytes.decode(html.tostring(skel)))
 
+    @staticmethod
+    def remove_posts_from_doc(doc):
+        parent = doc.find('body')
+        for x in doc.cssselect('.post'):
+            parent.remove(x)
+        assert len(doc.cssselect('.post')) == 0
+
     @classmethod
     def parse_doc(cls, docstring):
         """
@@ -60,9 +67,9 @@ class Oblique:
         """
         doc = html.document_fromstring(docstring)
         posts = get_items(doc)
-        print('Found %d posts' % len(posts))
+        print('Found {:d} posts'.format(len(posts)))
         skeleton = deepcopy(doc)
-        map(lambda x: x.drop_tree(), skeleton.cssselect('.post'))
+        cls.remove_posts_from_doc(skeleton)
 
         for post in posts:
             if item_has_title_link(post):

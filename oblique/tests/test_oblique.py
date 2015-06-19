@@ -42,6 +42,21 @@ class TestOblique(TestCase):
         )
         self.assertEqual(len(get_items(doc)), 0)
 
+    def test_remove_posts_from_doc(self):
+        self.o.remove_posts_from_doc(self.doc_with_posts)
+        emptydoc = (
+            '<html>'
+            '<head>'
+            '</head>'
+            '<body>'
+            '</body>'
+            '</html>'
+        )
+        self.assertEqual(
+            bytes.decode(html.tostring(self.doc_with_posts)),
+            emptydoc
+        )
+
     def test_get_items(self):
         self.assertEqual(len(get_items(self.doc_with_posts)), 2)
 
