@@ -92,8 +92,8 @@ class Oblique:
 
 
 def main():
+    o = Oblique()
     try:
-        o = Oblique()
         o.open_doc(sys.argv[1])
     except IndexError:
         print('Usage:\n\toblique filename.html')
