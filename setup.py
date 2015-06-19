@@ -15,4 +15,8 @@ setup(
     author='Nik Nyby',
     author_email='niknyby@riseup.net',
     url='https://github.com/nikolas/oblique',
+
+    entry_points={
+        'console_scripts': ['oblique = oblique.oblique:main'],
+    },
 )
