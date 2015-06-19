@@ -45,11 +45,12 @@ class Oblique:
     def write_doc(dname, fname, post, skel):
         """Write a detail page for the given post."""
         try:
-            os.mkdir('/tmp/%s' % dname)
+            os.mkdir(os.path.join('/tmp/', dname))
         except:
             pass
-        print(dname, fname)
-        with open('/tmp/%s/%s' % (dname, fname), 'w') as f:
+        path = os.path.join('/tmp/', dname, fname)
+        print('writing to', path)
+        with open(path, 'w') as f:
             f.write(bytes.decode(html.tostring(skel)))
 
     @classmethod
